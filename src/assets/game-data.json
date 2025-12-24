@@ -1,0 +1,547 @@
+{
+  "timingConfigurations": {
+    "short": [30, 23, 17, 14, 10, 8],
+    "medium": [32, 27, 20, 15, 12, 9],
+    "long": [34, 29, 23, 17, 14, 11]
+  },
+  "levels": {
+    "A": {
+      "stages": {
+        "1": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["وردة"],
+              "distractorCount": 2,
+              "distractors": ["سيارة"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["قطة"],
+              "distractorCount": 2,
+              "distractors": ["دراجة"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["تفاحة"],
+              "distractorCount": 2,
+              "distractors": ["شجرة"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["قبعة سوداء"],
+              "distractorCount": 2,
+              "distractors": ["حذاء"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["كرة حمراء"],
+              "distractorCount": 2,
+              "distractors": ["كرة"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["كرسي"],
+              "distractorCount": 3,
+              "distractors": ["طاولة", "أرنب أبيض"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["طفل"],
+              "distractorCount": 3,
+              "distractors": ["رجل", "سيدة وطفل"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["حمامة"],
+              "distractorCount": 3,
+              "distractors": ["خروف", "باص أصفر"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["دراجة زرقاء"],
+              "distractorCount": 3,
+              "distractors": ["دراجة", "بالونة حمراء"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["سمكة"],
+              "distractorCount": 4,
+              "distractors": ["بالونة", "قطار", "طاولة"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["كوب"],
+              "distractorCount": 4,
+              "distractors": ["طبق", "ملعقة", "كوب به عصير"]
+            },
+            {
+              "id": 12,
+              "requiredItems": ["ورقة صفراء"],
+              "distractorCount": 4,
+              "distractors": ["ورقة بيضاء", "مقص", "مسطرة"]
+            }
+          ]
+        },
+        "2": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["برتقالة وتفاحة"],
+              "distractorCount": 3,
+              "distractors": ["شباك", "عصفور في القفص"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["نهر"],
+              "distractorCount": 4,
+              "distractors": ["قلعة", "بيتة بيضاء", "علم أحمر وعلم أبيض"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["خاتم", "سلة زهور"],
+              "distractorCount": 3,
+              "distractors": ["لعبة"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["قطار", "دراجة"],
+              "distractorCount": 3,
+              "distractors": ["باص أصفر"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["حاسوب", "شجرة أمام المنزل"],
+              "distractorCount": 3,
+              "distractors": ["ملعقة"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["سلة فواكه", "عباءة سوداء"],
+              "distractorCount": 3,
+              "distractors": ["شمعة"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["مسمار", "خضراوات"],
+              "distractorCount": 4,
+              "distractors": ["تلفاز", "ساعة"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["قفتان", "جمل بني وجمل أسود"],
+              "distractorCount": 4,
+              "distractors": ["قحم", "حذاء أسود"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["حصان", "تفاحة حمراء"],
+              "distractorCount": 4,
+              "distractors": ["حصان", "تفاحة حمراء"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["والد قضاء", "بغطاء أخضر"],
+              "distractorCount": 4,
+              "distractors": ["والد قضاء", "بغطاء أخضر"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["نونس", "قميص أصفر وقطة بيضاء وقطة سوداء", "ليمونة صفراء"],
+              "distractorCount": 5,
+              "distractors": ["ذئب", "شارع", "قطة بيضاء"]
+            },
+            {
+              "id": 12,
+              "requiredItems": ["علم دولة الكويت", "كاس به حليب"],
+              "distractorCount": 5,
+              "distractors": ["سفينة", "الدبو", "سجادة حمراء"]
+            }
+          ]
+        },
+        "3": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["إبرة", "بنطلون أسود"],
+              "distractorCount": 4,
+              "distractors": ["عود تقاب", "سجادة بيضاء"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["نخلة", "شمعتان حمراء وبيضاء"],
+              "distractorCount": 4,
+              "distractors": ["قمر", "دجاجة بيضاء"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["جريدة", "أسد", "ذراع"],
+              "distractorCount": 4,
+              "distractors": ["شجرة تفاح"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["عنكبوت", "سنجاب", "خبز"],
+              "distractorCount": 5,
+              "distractors": ["فراشة خضراء وفراشة حمراء"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["جزر", "طاووس", "حوض به سمك"],
+              "distractorCount": 5,
+              "distractors": ["كتاب أبيض وكتاب أحمر"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["تعبان", "بقرة سوداء وبيضاء", "حصان أبيض"],
+              "distractorCount": 4,
+              "distractors": ["حصان أبيض وحصان أسود"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["شرطي", "طماطم", "دجاجة"],
+              "distractorCount": 5,
+              "distractors": ["خيار", "ليس كريم"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["تليفون", "ديك زومي", "كوب عصير"],
+              "distractorCount": 5,
+              "distractors": ["فأس", "صندوق مجوهرات"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["خروف", "مسلح", "سلحفاة"],
+              "distractorCount": 5,
+              "distractors": ["شجرة", "منزل", "كأس"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["جوة", "قارب أحمر", "قارب أبيض"],
+              "distractorCount": 6,
+              "distractors": ["ساعة", "زرافة", "ساعة يد"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["شمسية خضراء", "شمسية صفراء", "تفاحة حمراء"],
+              "distractorCount": 6,
+              "distractors": ["ليمون", "مسجد", "نخلة", "جزر"]
+            },
+            {
+              "id": 12,
+              "requiredItems": ["حاسوب", "نجمة حمراء", "نجمة صفراء ونجمة زرقاء"],
+              "distractorCount": 7,
+              "distractors": ["فأس", "صندوق", "ماس"]
+            }
+          ]
+        }
+      }
+    },
+    "B": {
+      "stages": {
+        "1": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["قبعة"],
+              "distractorCount": 2,
+              "distractors": ["حصان"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["ضفدع"],
+              "distractorCount": 2,
+              "distractors": ["زرافة"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["فاصولياء"],
+              "distractorCount": 3,
+              "distractors": ["تعبان", "ذرة"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["شال أحمر"],
+              "distractorCount": 3,
+              "distractors": ["جندي", "أرنب أبيض"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["بغطاء ملون"],
+              "distractorCount": 5,
+              "distractors": ["سيارة", "طبيب", "فلفل أحمر"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["حصان بني"],
+              "distractorCount": 5,
+              "distractors": ["لبن", "مسجد", "حصان أسود", "وردة صفراء"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["ذئابة", "شجرة برتقال"],
+              "distractorCount": 6,
+              "distractors": ["شمس", "بالونة", "عسل", "شمعة حمراء"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["عصفور على الشجرة", "شجرة تفاح"],
+              "distractorCount": 6,
+              "distractors": ["قطار", "بطيخة", "دلفس", "جمل وحشي", "عنب", "علبة"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["بلح", "عربة يسحبها حصان"],
+              "distractorCount": 4,
+              "distractors": ["بلح", "عربة يسحبها حصان"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["كرسي", "كاس به حليب"],
+              "distractorCount": 7,
+              "distractors": ["صندوق", "شرطي", "نخلة", "فلاح", "حاوية بها قماشة", "طاولة عليها تلفزيون", "بطلون أسود"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["سجادة حمراء", "صحن به لحم"],
+              "distractorCount": 4,
+              "distractors": ["بطلون أسود"]
+            },
+            {
+              "id": 12,
+              "requiredItems": ["شاطئ", "غيوم بيضاء"],
+              "distractorCount": 9,
+              "distractors": ["برتقان", "تليفون", "مقص", "حقيبة", "بها شراع", "حقيبة سوداء"]
+            }
+          ]
+        },
+        "2": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["طاولة", "عروس به أعياد"],
+              "distractorCount": 4,
+              "distractors": ["مروحة", "قطة سوداء وقطة بيضاء", "عنبة بها"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["غسالة", "حمامة سوداء", "حمامة بيضاء"],
+              "distractorCount": 7,
+              "distractors": ["فيل", "مذياع", "كرسي أحمر وكرسي أزرق", "طاولة عليها لامبريون"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["ديك رومي", "وسادة", "أهرامات"],
+              "distractorCount": 5,
+              "distractors": ["ديك رومي", "وسادة", "أهرامات"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["خياط", "أمطار", "مكتبة بها"],
+              "distractorCount": 5,
+              "distractors": ["خياط", "أمطار", "مكتبة بها"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["كتب", "غواص", "عقرب", "بطريق", "ذو لون أسود وأبيض"],
+              "distractorCount": 5,
+              "distractors": ["كتب"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["طائرة", "قلم", "حليب"],
+              "distractorCount": 6,
+              "distractors": ["طائرة", "قلم", "حليب"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["تفاسير", "جمل أبيض", "وجمل أسود", "على سرير"],
+              "distractorCount": 6,
+              "distractors": ["منزل", "كرسي", "مكواة", "مذياع"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["عنكبوت", "سنجاب", "خبز"],
+              "distractorCount": 7,
+              "distractors": ["أذن", "جريدة", "قلم"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["مقص", "مسطرة", "كتاب", "قلم وأوراق", "أطفال", "حوض", "به سمك"],
+              "distractorCount": 8,
+              "distractors": ["قطة", "مصباح", "عقرب", "أرنب أبيض", "مهرج يلعب بالكرات"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["نمر", "قلعة", "مسابقة جري", "ورقة صفراء", "بغطاء ملون"],
+              "distractorCount": 7,
+              "distractors": ["نمر", "قلعة", "مسابقة جري"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["قميص", "حافظ", "مصباح", "مسمار", "طاولة", "بلاص"],
+              "distractorCount": 9,
+              "distractors": ["بتر", "طابور الصباح"]
+            }
+          ]
+        },
+        "3": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["ذرة", "كلب", "رجل يلبس قبعة"],
+              "distractorCount": 6,
+              "distractors": ["كتاب", "جزر", "بغطاء فوق الشجرة"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["طائرة", "جوارب أبيض وأسود", "منزل أمامه شجرة"],
+              "distractorCount": 5,
+              "distractors": ["نخيل", "ليس كريم"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["كتاب", "تعلب", "منطار"],
+              "distractorCount": 5,
+              "distractors": ["قلم"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["قفتان", "درس", "شجرة بها عصفور", "بطل أطفال"],
+              "distractorCount": 5,
+              "distractors": ["شاحنة"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["نقود", "غراب", "طفل يقرأ كتاب", "طبيب يعالج مريض", "أستان", "أشارة ضوئية", "ولد يسبح في البحر"],
+              "distractorCount": 5,
+              "distractors": ["كرة", "جزر"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["نجار", "ملعب", "أبراج الكويت"],
+              "distractorCount": 5,
+              "distractors": ["نجار", "ملعب", "أبراج الكويت"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["ذراع", "جريدة", "سفينة"],
+              "distractorCount": 7,
+              "distractors": ["ذراع", "جريدة", "سفينة"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["نخلة على الشجرة"],
+              "distractorCount": 5,
+              "distractors": ["نخلة على الشجرة"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["فراولة", "طفل يحبو على الأرض", "بنت تلعب بالدمية", "رجل يغير الشارع"],
+              "distractorCount": 7,
+              "distractors": ["نجار", "ملعب", "أبراج الكويت"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["غواص", "سيارة مطافئ", "طالب يقرأ كتاب", "خياط", "ملابس"],
+              "distractorCount": 7,
+              "distractors": ["ذراع", "ساعة يد", "فرشاة أسنان"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["طائرة عسكرية", "أسد وغزالة"],
+              "distractorCount": 7,
+              "distractors": ["مطفقة دريق", "حقيبة حمراء وبيضاء", "يجلس على الكرسي", "مصور"]
+            },
+            {
+              "id": 12,
+              "requiredItems": ["كاميرا فيديو", "أسلاك كهرباء", "ملعقة وسكينة", "نجمة صفراء ونجمة حمراء"],
+              "distractorCount": 7,
+              "distractors": ["مدفأة", "نجمة", "مصباح"]
+            }
+          ]
+        }
+      }
+    },
+    "C": {
+      "stages": {
+        "1": {
+          "questions": [
+            {
+              "id": 1,
+              "requiredItems": ["وردة", "سيارة", "رجل يحلي", "كوب به عصير"],
+              "distractorCount": 7,
+              "distractors": ["شجرة", "أسطوانات غاز", "طفل ينام بالسرير", "بطارية", "سمكة", "حافلة", "طبيب يفحص المريض", "العريش", "إمرأة تنسدق"]
+            },
+            {
+              "id": 2,
+              "requiredItems": ["بالونة", "قطار", "ورقة بيضاء"],
+              "distractorCount": 10,
+              "distractors": ["شجرة", "أسطوانات غاز", "طفل ينام بالسرير", "بطارية", "سمكة", "حافلة", "طبيب يفحص المريض", "العريش", "إمرأة تنسدق"]
+            },
+            {
+              "id": 3,
+              "requiredItems": ["طبق", "ملعقة", "جندي", "يحمل السلاح", "بنت تنسقي الزرع"],
+              "distractorCount": 8,
+              "distractors": ["شرطي ينظم السير"]
+            },
+            {
+              "id": 4,
+              "requiredItems": ["دراجة", "قطة", "دجاجة", "فوس فيق", "مدوق"],
+              "distractorCount": 7,
+              "distractors": ["فراشة خضراء وفراشة حمراء"]
+            },
+            {
+              "id": 5,
+              "requiredItems": ["خروف", "منزل", "سيارة أمام المنزل", "ورقة صفراء", "قيمة سوداء"],
+              "distractorCount": 8,
+              "distractors": ["كرة", "ديك زومي", "حوض به سمك"]
+            },
+            {
+              "id": 6,
+              "requiredItems": ["مقص", "مسطرة", "قلم وأوراق", "أطفال", "حوض", "به سمك"],
+              "distractorCount": 8,
+              "distractors": ["قطة", "مصباح", "عقرب", "أرنب أبيض", "مهرج يلعب بالكرات"]
+            },
+            {
+              "id": 7,
+              "requiredItems": ["مروج", "ميلاد يجدد", "السلاح", "طالب يحمل علم", "مكيف", "سجيلة", "قفان", "برسم لوحة", "طفل يشرب الحليب"],
+              "distractorCount": 5,
+              "distractors": ["نخلة على الشجرة"]
+            },
+            {
+              "id": 8,
+              "requiredItems": ["مكيف", "سجيلة", "قفان", "برسم لوحة", "طفل يشرب الحليب"],
+              "distractorCount": 5,
+              "distractors": ["نخلة على الشجرة"]
+            },
+            {
+              "id": 9,
+              "requiredItems": ["فراولة", "طفل يحبو على الأرض", "بنت تلعب بالدمية", "رجل يغير الشارع"],
+              "distractorCount": 7,
+              "distractors": ["نجار", "ملعب", "أبراج الكويت"]
+            },
+            {
+              "id": 10,
+              "requiredItems": ["غواص", "سيارة مطافئ", "طالب يقرأ كتاب", "خياط", "ملابس"],
+              "distractorCount": 7,
+              "distractors": ["ذراع", "ساعة يد", "فرشاة أسنان"]
+            },
+            {
+              "id": 11,
+              "requiredItems": ["طائرة عسكرية", "أسد وغزالة"],
+              "distractorCount": 7,
+              "distractors": ["مطفقة دريق", "حقيبة حمراء وبيضاء", "يجلس على الكرسي", "مصور"]
+            },
+            {
+              "id": 12,
+              "requiredItems": ["كاميرا فيديو", "أسلاك كهرباء", "ملعقة وسكينة", "نجمة صفراء ونجمة حمراء"],
+              "distractorCount": 7,
+              "distractors": ["مدفأة", "نجمة", "مصباح"]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

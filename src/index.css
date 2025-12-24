@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styles for dyslexia-friendly design */
+@layer base {
+  * {
+    @apply antialiased;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-cream-500 text-gray-900 font-arabic;
+    font-size: 18px;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+  }
+  
+  /* RTL Support */
+  [dir="rtl"] {
+    direction: rtl;
+  }
+  
+  [dir="ltr"] {
+    direction: ltr;
+  }
+  
+  /* Dyslexia-friendly text rendering */
+  p, span, div, button, input, textarea, select {
+    @apply font-arabic;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    word-spacing: 0.16em;
+  }
+  
+  /* Headings with better contrast */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-arabic font-bold;
+    letter-spacing: 0.02em;
+  }
+  
+  h1 {
+    @apply text-child-3xl;
+  }
+  
+  h2 {
+    @apply text-child-2xl;
+  }
+  
+  h3 {
+    @apply text-child-xl;
+  }
+  
+  h4 {
+    @apply text-child-lg;
+  }
+  
+  /* Button styles */
+  button {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  button:focus {
+    @apply outline-none ring-4 ring-primary-300;
+  }
+  
+  /* Input styles */
+  input, textarea, select {
+    @apply transition-all duration-200;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    @apply outline-none ring-4 ring-primary-300;
+  }
+  
+  /* Disable text selection on game elements */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer components {
+  /* Primary button */
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-bold py-4 px-8 rounded-child-lg shadow-child-lg transition-all duration-200 text-child-base;
+  }
+  
+  .btn-primary:hover {
+    @apply shadow-child-xl transform scale-105;
+  }
+  
+  .btn-primary:active {
+    @apply transform scale-95;
+  }
+  
+  /* Success button */
+  .btn-success {
+    @apply bg-success-500 hover:bg-success-600 text-white font-bold py-4 px-8 rounded-child-lg shadow-child-lg transition-all duration-200 text-child-base;
+  }
+  
+  /* Secondary button */
+  .btn-secondary {
+    @apply bg-beige-500 hover:bg-beige-600 text-gray-900 font-bold py-4 px-8 rounded-child-lg shadow-child transition-all duration-200 text-child-base;
+  }
+  
+  /* Card component */
+  .card {
+    @apply bg-white rounded-child-xl shadow-child-lg p-6 border-2 border-beige-300;
+  }
+  
+  /* Game item card */
+  .game-item {
+    @apply bg-white rounded-child-lg shadow-child p-4 cursor-pointer transition-all duration-200 border-4 border-transparent hover:border-primary-400 hover:shadow-child-lg hover:scale-105;
+  }
+  
+  .game-item.selected {
+    @apply border-primary-500 shadow-child-xl scale-105;
+  }
+  
+  .game-item.correct {
+    @apply border-success-500 bg-success-50;
+  }
+  
+  .game-item.incorrect {
+    @apply border-error-500 bg-error-50;
+  }
+  
+  /* Input field */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-child border-2 border-beige-400 bg-white text-child-base focus:border-primary-500 focus:ring-4 focus:ring-primary-300 transition-all;
+  }
+  
+  /* Label */
+  .label {
+    @apply block text-child-base font-bold text-gray-800 mb-2;
+  }
+  
+  /* Progress bar */
+  .progress-bar {
+    @apply w-full h-6 bg-beige-300 rounded-full overflow-hidden shadow-inner;
+  }
+  
+  .progress-bar-fill {
+    @apply h-full bg-gradient-to-r from-primary-500 to-primary-600 transition-all duration-500 ease-out;
+  }
+  
+  /* Loading spinner */
+  .spinner {
+    @apply inline-block w-12 h-12 border-4 border-beige-300 border-t-primary-500 rounded-full animate-spin;
+  }
+  
+  /* Toast notification */
+  .toast {
+    @apply fixed bottom-8 right-8 bg-white rounded-child-lg shadow-child-xl p-6 border-r-4 animate-slide-in-right;
+  }
+  
+  .toast.success {
+    @apply border-success-500;
+  }
+  
+  .toast.error {
+    @apply border-error-500;
+  }
+  
+  .toast.info {
+    @apply border-primary-500;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.6s ease-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* Keyframe animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Print styles for certificates */
+@media print {
+  body {
+    @apply bg-white;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-full-page {
+    page-break-after: always;
+    width: 100%;
+    height: 100vh;
+  }
+}
