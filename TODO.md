@@ -49,9 +49,9 @@
 - [ ] Implement data export
 
 ### Phase 5: Certificates (Priority 5)
-- [ ] Design certificate template
-- [ ] Implement PDF generation (jsPDF)
-- [ ] Add print functionality
+- [x] Design certificate template
+- [x] Implement PDF generation (jsPDF)
+- [x] Add print functionality
 - [ ] Save certificates to database
 - [ ] Add certificate gallery
 
