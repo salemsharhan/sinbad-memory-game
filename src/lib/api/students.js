@@ -1,14 +1,16 @@
-import { supabase } from '../supabaseClient';
+import supabaseApi from '../supabaseAxios';
 
 /**
  * Get all students for the current teacher
  */
 export const getAllStudents = async (teacherId) => {
-  const { data, error } = await supabase
+  const result = await supabaseApi
     .from('students')
     .select('*')
     .eq('teacher_id', teacherId)
     .order('created_at', { ascending: false });
+  
+  const { data, error } = await result;
   
   if (error) {
     console.error('Error fetching students:', error);
@@ -21,7 +23,7 @@ export const getAllStudents = async (teacherId) => {
  * Get a single student by ID
  */
 export const getStudentById = async (studentId) => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseApi
     .from('students')
     .select('*')
     .eq('id', studentId)
@@ -38,9 +40,9 @@ export const getStudentById = async (studentId) => {
  * Create a new student
  */
 export const createStudent = async (studentData) => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseApi
     .from('students')
-    .insert([studentData])
+    .insert(studentData)
     .select()
     .single();
   
@@ -55,7 +57,7 @@ export const createStudent = async (studentData) => {
  * Update student information
  */
 export const updateStudent = async (studentId, updates) => {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseApi
     .from('students')
     .update(updates)
     .eq('id', studentId)
@@ -73,7 +75,7 @@ export const updateStudent = async (studentId, updates) => {
  * Delete a student
  */
 export const deleteStudent = async (studentId) => {
-  const { error } = await supabase
+  const { error } = await supabaseApi
     .from('students')
     .delete()
     .eq('id', studentId);
@@ -89,11 +91,13 @@ export const deleteStudent = async (studentId) => {
  * Get student's game sessions
  */
 export const getStudentSessions = async (studentId) => {
-  const { data, error } = await supabase
+  const result = await supabaseApi
     .from('game_sessions')
     .select('*')
     .eq('student_id', studentId)
     .order('created_at', { ascending: false });
+  
+  const { data, error } = await result;
   
   if (error) {
     console.error('Error fetching student sessions:', error);
@@ -106,11 +110,13 @@ export const getStudentSessions = async (studentId) => {
  * Get student's achievements
  */
 export const getStudentAchievements = async (studentId) => {
-  const { data, error } = await supabase
+  const result = await supabaseApi
     .from('achievements')
     .select('*')
     .eq('student_id', studentId)
     .order('completed_at', { ascending: false });
+  
+  const { data, error } = await result;
   
   if (error) {
     console.error('Error fetching student achievements:', error);
@@ -123,26 +129,50 @@ export const getStudentAchievements = async (studentId) => {
  * Get student progress statistics
  */
 export const getStudentProgress = async (studentId) => {
-  // Get all completed sessions
-  const { data: sessions, error: sessionsError } = await supabase
+  // Get all completed sessions - need to filter by status in code since we can't chain multiple eq
+  const result = await supabaseApi
     .from('game_sessions')
-    .select('*, game_results(*)')
+    .select('*')
     .eq('student_id', studentId)
-    .eq('status', 'completed');
+    .order('created_at', { ascending: false });
+  
+  const { data: allSessions, error: sessionsError } = await result;
   
   if (sessionsError) {
     console.error('Error fetching student progress:', sessionsError);
     throw sessionsError;
   }
   
+  // Filter completed sessions
+  const sessions = allSessions?.filter(s => s.status === 'completed') || [];
+  
+  // Get results for all sessions
+  const sessionIds = sessions.map(s => s.id);
+  const allResults = [];
+  
+  for (const sessionId of sessionIds) {
+    const result = await supabaseApi
+      .from('game_results')
+      .select('*')
+      .eq('session_id', sessionId);
+    
+    const { data: results } = await result;
+    
+    if (results) {
+      allResults.push(...results);
+    }
+  }
+  
+  // Attach results to sessions
+  const sessionsWithResults = sessions.map(session => ({
+    ...session,
+    game_results: allResults.filter(r => r.session_id === session.id)
+  }));
+  
   // Calculate statistics
   const totalSessions = sessions.length;
-  const totalQuestions = sessions.reduce((sum, session) => 
-    sum + (session.game_results?.length || 0), 0
-  );
-  const correctAnswers = sessions.reduce((sum, session) => 
-    sum + (session.game_results?.filter(r => r.is_correct).length || 0), 0
-  );
+  const totalQuestions = allResults.length;
+  const correctAnswers = allResults.filter(r => r.is_correct).length;
   const averageScore = totalQuestions > 0 
     ? Math.round((correctAnswers / totalQuestions) * 100) 
     : 0;
@@ -152,6 +182,6 @@ export const getStudentProgress = async (studentId) => {
     totalQuestions,
     correctAnswers,
     averageScore,
-    sessions,
+    sessions: sessionsWithResults,
   };
 };

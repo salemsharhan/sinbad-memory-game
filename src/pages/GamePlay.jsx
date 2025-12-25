@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useRoute } from 'wouter';
+import { useParams, useNavigate } from 'react-router-dom';
 import { audioManager } from '../lib/audioManager';
 import { saveGameResult } from '../lib/api/game';
 import gameData from '../assets/game-data.json';
@@ -15,8 +15,8 @@ const GAME_PHASES = {
 };
 
 export default function GamePlay() {
-  const [, params] = useRoute('/game/play/:sessionId');
-  const [, setLocation] = useLocation();
+  const { sessionId } = useParams();
+  const navigate = useNavigate();
   
   const [gameState, setGameState] = useState({
     phase: GAME_PHASES.LOADING,
@@ -36,7 +36,7 @@ export default function GamePlay() {
   // Load session and questions
   useEffect(() => {
     loadSession();
-  }, [params?.sessionId]);
+  }, [sessionId]);
 
   // Update current question
   useEffect(() => {
@@ -61,11 +61,11 @@ export default function GamePlay() {
     try {
       // In a real app, fetch session from Supabase
       // For now, use mock data from localStorage
-      const sessionData = JSON.parse(localStorage.getItem(`session_${params.sessionId}`));
+      const sessionData = JSON.parse(localStorage.getItem(`session_${sessionId}`));
       
       if (!sessionData) {
         alert('الجلسة غير موجودة');
-        setLocation('/');
+        navigate('/');
         return;
       }
 
@@ -86,7 +86,7 @@ export default function GamePlay() {
     } catch (error) {
       console.error('Error loading session:', error);
       alert('حدث خطأ في تحميل الجلسة');
-      setLocation('/');
+      navigate('/');
     }
   };
 
@@ -188,7 +188,7 @@ export default function GamePlay() {
     // Save to database
     try {
       await saveGameResult({
-        sessionId: params.sessionId,
+        sessionId: sessionId,
         questionNumber: gameState.currentQuestionIndex + 1,
         requiredItems: requiredItems.join(','),
         selectedItems: selectedItems.join(','),
@@ -250,7 +250,7 @@ export default function GamePlay() {
 
     // Navigate to results after delay
     setTimeout(() => {
-      setLocation(`/game/results/${params.sessionId}`);
+      navigate(`/game/results/${sessionId}`);
     }, 4000);
   };
 

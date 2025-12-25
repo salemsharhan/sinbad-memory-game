@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useRoute, useLocation } from 'wouter';
+import { useParams, useNavigate } from 'react-router-dom';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { getStudentById, getStudentSessions } from '../lib/api/students';
 
 const COLORS = ['#4A90E2', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
 
 export default function StudentDetail() {
-  const [, params] = useRoute('/students/:studentId');
-  const [, setLocation] = useLocation();
+  const { studentId } = useParams();
+  const navigate = useNavigate();
   
   const [student, setStudent] = useState(null);
   const [sessions, setSessions] = useState([]);
@@ -16,16 +16,16 @@ export default function StudentDetail() {
 
   useEffect(() => {
     loadStudentData();
-  }, [params?.studentId]);
+  }, [studentId]);
 
   const loadStudentData = async () => {
     try {
       setLoading(true);
       
-      const studentData = await getStudentById(params.studentId);
+      const studentData = await getStudentById(studentId);
       setStudent(studentData);
       
-      const sessionsData = await getStudentSessions(params.studentId);
+      const sessionsData = await getStudentSessions(studentId);
       setSessions(sessionsData || []);
       
     } catch (error) {
@@ -53,7 +53,7 @@ export default function StudentDetail() {
         <div className="text-center">
           <p className="text-2xl font-bold text-text mb-4">الطالب غير موجود</p>
           <button
-            onClick={() => setLocation('/students')}
+            onClick={() => navigate('/students')}
             className="btn-primary"
           >
             العودة إلى قائمة الطلاب
@@ -75,7 +75,7 @@ export default function StudentDetail() {
     : 0;
 
   const progressData = sessions.slice(-10).map((session, index) => ({
-    name: \`جلسة \${index + 1}\`,
+    name: `جلسة ${index + 1}`,
     score: session.score || 0,
     accuracy: session.totalQuestions > 0 
       ? ((session.correctAnswers / session.totalQuestions) * 100).toFixed(1)
@@ -87,7 +87,7 @@ export default function StudentDetail() {
     <div className="min-h-screen bg-cream p-4 md:p-8" dir="rtl">
       <div className="max-w-7xl mx-auto mb-8">
         <button
-          onClick={() => setLocation('/students')}
+          onClick={() => navigate('/students')}
           className="mb-4 text-primary hover:text-primary-dark flex items-center gap-2"
         >
           ← العودة إلى قائمة الطلاب
@@ -106,7 +106,7 @@ export default function StudentDetail() {
             </div>
             <div className="text-left">
               <button
-                onClick={() => setLocation(\`/game/entry?studentId=\${student.id}\`)}
+                onClick={() => navigate(`/game/${student.id}`)}
                 className="btn-primary text-xl px-8 py-4"
               >
                 بدء جلسة جديدة

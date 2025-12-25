@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useRoute, useLocation } from 'wouter';
+import { useParams, useNavigate } from 'react-router-dom';
 import Certificate from '../components/Certificate';
 import { getSessionById } from '../lib/api/game';
 import { getStudentById } from '../lib/api/students';
 
 export default function GameResults() {
-  const [, params] = useRoute('/game/results/:sessionId');
-  const [, setLocation] = useLocation();
+  const { sessionId } = useParams();
+  const navigate = useNavigate();
   
   const [session, setSession] = useState(null);
   const [student, setStudent] = useState(null);
@@ -15,12 +15,12 @@ export default function GameResults() {
 
   useEffect(() => {
     loadResults();
-  }, [params?.sessionId]);
+  }, [sessionId]);
 
   const loadResults = async () => {
     try {
       setLoading(true);
-      const sessionData = await getSessionById(params.sessionId);
+      const sessionData = await getSessionById(sessionId);
       setSession(sessionData);
       if (sessionData.studentId) {
         const studentData = await getStudentById(sessionData.studentId);
@@ -87,7 +87,7 @@ export default function GameResults() {
             </button>
           )}
           <button
-            onClick={() => setLocation('/dashboard')}
+            onClick={() => navigate('/dashboard')}
             className="btn-secondary text-xl px-8 py-4"
           >
             العودة إلى لوحة التحكم

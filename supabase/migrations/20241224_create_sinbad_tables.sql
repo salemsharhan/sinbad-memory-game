@@ -3,14 +3,11 @@
 -- Supabase (PostgreSQL) Migration
 -- ==========================================
 
--- Enable UUID extension
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 -- ==========================================
 -- TEACHERS/ADMIN USERS TABLE
 -- ==========================================
 CREATE TABLE IF NOT EXISTS public.teachers (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   auth_user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE UNIQUE,
   full_name TEXT NOT NULL,
   email VARCHAR(320),
@@ -24,7 +21,7 @@ CREATE TABLE IF NOT EXISTS public.teachers (
 -- STUDENTS TABLE
 -- ==========================================
 CREATE TABLE IF NOT EXISTS public.students (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   student_id VARCHAR(100) NOT NULL UNIQUE,
   name TEXT NOT NULL,
   teacher_id UUID REFERENCES public.teachers(id) ON DELETE SET NULL,
@@ -41,7 +38,7 @@ CREATE TABLE IF NOT EXISTS public.students (
 -- GAME SESSIONS TABLE
 -- ==========================================
 CREATE TABLE IF NOT EXISTS public.game_sessions (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   session_id VARCHAR(100) NOT NULL UNIQUE,
   student_id UUID REFERENCES public.students(id) ON DELETE CASCADE NOT NULL,
   level VARCHAR(1) NOT NULL CHECK (level IN ('A', 'B', 'C')),
@@ -57,7 +54,7 @@ CREATE TABLE IF NOT EXISTS public.game_sessions (
 -- GAME RESULTS TABLE
 -- ==========================================
 CREATE TABLE IF NOT EXISTS public.game_results (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   session_id UUID REFERENCES public.game_sessions(id) ON DELETE CASCADE NOT NULL,
   student_id UUID REFERENCES public.students(id) ON DELETE CASCADE NOT NULL,
   level VARCHAR(1) NOT NULL CHECK (level IN ('A', 'B', 'C')),
@@ -76,7 +73,7 @@ CREATE TABLE IF NOT EXISTS public.game_results (
 -- LEVEL CONFIGURATIONS TABLE
 -- ==========================================
 CREATE TABLE IF NOT EXISTS public.level_configurations (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   teacher_id UUID REFERENCES public.teachers(id) ON DELETE CASCADE NOT NULL,
   level VARCHAR(1) NOT NULL CHECK (level IN ('A', 'B', 'C')),
   stage INTEGER NOT NULL CHECK (stage BETWEEN 1 AND 3),
@@ -92,7 +89,7 @@ CREATE TABLE IF NOT EXISTS public.level_configurations (
 -- ACHIEVEMENTS TABLE (for certificates)
 -- ==========================================
 CREATE TABLE IF NOT EXISTS public.achievements (
-  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   student_id UUID REFERENCES public.students(id) ON DELETE CASCADE NOT NULL,
   level VARCHAR(1) NOT NULL CHECK (level IN ('A', 'B', 'C')),
   stage INTEGER NOT NULL CHECK (stage BETWEEN 1 AND 3),
