@@ -54,10 +54,12 @@ def load_game_items():
         data = json.load(f)
     
     items = set()
-    for level_data in data['levels'].values():
-        for stage in level_data['stages']:
-            items.update(stage['items'])
-            items.update(stage['distractors'])
+    # Parse the actual structure: levels -> A/B/C -> stages -> 1/2/3 -> questions
+    for level_key, level_data in data['levels'].items():
+        for stage_key, stage_data in level_data['stages'].items():
+            for question in stage_data['questions']:
+                items.update(question['requiredItems'])
+                items.update(question['distractors'])
     
     return sorted(list(items))
 
