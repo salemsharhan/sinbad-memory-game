@@ -87,7 +87,7 @@
           "questions": [
             {
               "id": 1,
-              "requiredItems": ["برتقالة وتفاحة"],
+              "requiredItems": ["برتقالةوتفاحة"],
               "distractorCount": 3,
               "distractors": ["شباك", "عصفور في القفص"]
             },
@@ -95,13 +95,13 @@
               "id": 2,
               "requiredItems": ["نهر"],
               "distractorCount": 4,
-              "distractors": ["قلعة", "بيتة بيضاء", "علم أحمر وعلم أبيض"]
+              "distractors": ["قلعة", "ريشة بيضاء", "علم أحمر وعلم أبيض"]
             },
             {
               "id": 3,
               "requiredItems": ["خاتم", "سلة زهور"],
               "distractorCount": 3,
-              "distractors": ["لعبة"]
+              "distractors": ["لمبة"]
             },
             {
               "id": 4,
@@ -129,33 +129,33 @@
             },
             {
               "id": 8,
-              "requiredItems": ["قفتان", "جمل بني وجمل أسود"],
+              "requiredItems": ["قفاز", "جمل بني وجمل أسود"],
               "distractorCount": 4,
-              "distractors": ["قحم", "حذاء أسود"]
+              "distractors": ["فحم", "حذاء أسود"]
             },
             {
               "id": 9,
-              "requiredItems": ["حصان", "تفاحة حمراء"],
+              "requiredItems": ["وعاء به موز", "حقيبة بيضاء"],
               "distractorCount": 4,
               "distractors": ["حصان", "تفاحة حمراء"]
             },
             {
               "id": 10,
-              "requiredItems": ["والد قضاء", "بغطاء أخضر"],
+              "requiredItems": ["جندي", "ثلاجة"],
               "distractorCount": 4,
-              "distractors": ["والد قضاء", "بغطاء أخضر"]
+              "distractors": ["رائد فضاء", "بغبغاء أخضر"]
             },
             {
               "id": 11,
-              "requiredItems": ["نونس", "قميص أصفر وقطة بيضاء وقطة سوداء", "ليمونة صفراء"],
+              "requiredItems": ["نورس", "قميص أصفر"],
               "distractorCount": 5,
-              "distractors": ["ذئب", "شارع", "قطة بيضاء"]
+              "distractors": ["ذئب", "شارع", "قطة بيضاء وقطة سوداء", "ليمونة صفراء"]
             },
             {
               "id": 12,
-              "requiredItems": ["علم دولة الكويت", "كاس به حليب"],
+              "requiredItems": ["علم دولة الكويت", "كأس به حليب"],
               "distractorCount": 5,
-              "distractors": ["سفينة", "الدبو", "سجادة حمراء"]
+              "distractors": ["سفينة", "راديو", "سجادة حمراء"]
             }
           ]
         },

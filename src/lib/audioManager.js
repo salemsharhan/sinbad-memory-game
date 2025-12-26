@@ -56,7 +56,8 @@ class AudioManager {
         audio = await this.preloadAudio(src);
       } catch (error) {
         console.warn(`Audio file not found: ${src}, skipping...`);
-        return;
+        // Return resolved promise so sequence continues
+        return Promise.resolve();
       }
 
       this.currentAudio = audio;
@@ -65,14 +66,28 @@ class AudioManager {
       await audio.play();
 
       return new Promise((resolve) => {
-        audio.addEventListener('ended', () => {
+        const onEnded = () => {
           this.isPlaying = false;
+          audio.removeEventListener('ended', onEnded);
           resolve();
-        }, { once: true });
+        };
+        audio.addEventListener('ended', onEnded, { once: true });
+        
+        // Fallback timeout in case 'ended' event doesn't fire
+        setTimeout(() => {
+          if (this.isPlaying) {
+            console.warn(`Audio playback timeout for ${src}, forcing resolve`);
+            this.isPlaying = false;
+            audio.removeEventListener('ended', onEnded);
+            resolve();
+          }
+        }, 10000); // 10 second timeout
       });
     } catch (error) {
       console.error('Error playing audio:', error);
       this.isPlaying = false;
+      // Return resolved promise so sequence continues even on error
+      return Promise.resolve();
     }
   }
 
@@ -83,6 +98,9 @@ class AudioManager {
    * @returns {Promise<void>}
    */
   async playSequence(srcs, delayMs = 800) {
+    // Clear any previous audio to prevent overlap
+    this.stop();
+    
     for (const src of srcs) {
       await this.play(src);
       if (delayMs > 0) {
@@ -129,7 +147,10 @@ class AudioManager {
    * @returns {string}
    */
   getItemAudioPath(itemName) {
-    return `/audio/items/${itemName}.mp3`;
+    // Audio files are named: item-{itemName}.mp3
+    // Replace spaces with dashes to match actual file names
+    const fileName = itemName.replace(/\s+/g, '-');
+    return `/audio/item-${fileName}.mp3`;
   }
 
   /**
@@ -138,7 +159,23 @@ class AudioManager {
    * @returns {string}
    */
   getInstructionAudioPath(instructionKey) {
-    return `/audio/instructions/${instructionKey}.mp3`;
+    // Audio files are named: instruction-{key}.mp3
+    // Map common keys to actual file names
+    const instructionMap = {
+      'listen-carefully': 'watch_carefully',
+      'watch-carefully': 'watch_carefully',
+      'stage-complete': 'level_complete',
+      'level-complete': 'level_complete',
+      'correct': 'correct',
+      'incorrect': 'incorrect',
+      'get-ready': 'get_ready',
+      'good-job': 'good_job',
+      'welcome': 'welcome',
+      'great-job': 'good_job',
+      'excellent': 'excellent'
+    };
+    const fileName = instructionMap[instructionKey] || instructionKey.replace(/-/g, '_');
+    return `/audio/instruction-${fileName}.mp3`;
   }
 
   /**
@@ -147,7 +184,20 @@ class AudioManager {
    * @returns {string}
    */
   getEncouragementAudioPath(encouragementKey) {
-    return `/audio/encouragement/${encouragementKey}.mp3`;
+    // Audio files are named: encouragement-{key}.mp3
+    // Map common keys to actual file names
+    const encouragementMap = {
+      'great-job': 'great',
+      'amazing': 'amazing',
+      'fantastic': 'fantastic',
+      'wonderful': 'wonderful',
+      'you-can-do-it': 'you_can_do_it',
+      'keep-going': 'keep_going',
+      'almost-there': 'almost_there',
+      'one-more-try': 'one_more_try'
+    };
+    const fileName = encouragementMap[encouragementKey] || encouragementKey.replace(/-/g, '_');
+    return `/audio/encouragement-${fileName}.mp3`;
   }
 }
 

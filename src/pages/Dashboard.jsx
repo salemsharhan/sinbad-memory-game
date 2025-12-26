@@ -5,7 +5,7 @@ import { getAllStudents } from '../lib/api/students';
 import { Users, Settings, LogOut, TrendingUp, Award, Clock } from 'lucide-react';
 
 const Dashboard = () => {
-  const { teacher, signOut } = useAuth();
+  const { teacher, signOut, loading: authLoading } = useAuth();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
@@ -17,10 +17,17 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (teacher) {
-      loadDashboardData();
+    // Wait for auth to finish loading, then load dashboard data
+    if (!authLoading) {
+      if (teacher) {
+        loadDashboardData();
+      } else {
+        // Teacher profile doesn't exist, but user is authenticated
+        // Show dashboard with empty state
+        setLoading(false);
+      }
     }
-  }, [teacher]);
+  }, [teacher, authLoading]);
 
   const loadDashboardData = async () => {
     try {
@@ -55,7 +62,8 @@ const Dashboard = () => {
     }
   };
 
-  if (loading) {
+  // Show loading only if auth is still loading or dashboard data is loading
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">

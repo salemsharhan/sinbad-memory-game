@@ -5,7 +5,7 @@ import { getAllStudents, createStudent, deleteStudent } from '../lib/api/student
 import { Users, Plus, Trash2, Eye, Search } from 'lucide-react';
 
 const Students = () => {
-  const { teacher } = useAuth();
+  const { teacher, user, loading: authLoading } = useAuth();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -16,12 +16,25 @@ const Students = () => {
   });
 
   useEffect(() => {
-    if (teacher) {
-      loadStudents();
+    // Wait for auth to finish loading
+    if (!authLoading) {
+      if (teacher) {
+        loadStudents();
+      } else if (user && !teacher) {
+        // Teacher profile doesn't exist, show error
+        setLoading(false);
+      } else {
+        // Still loading or no user
+        setLoading(false);
+      }
     }
-  }, [teacher]);
+  }, [teacher, user, authLoading]);
 
   const loadStudents = async () => {
+    if (!teacher || !teacher.id) {
+      setLoading(false);
+      return;
+    }
     try {
       setLoading(true);
       const data = await getAllStudents(teacher.id);
@@ -36,6 +49,10 @@ const Students = () => {
 
   const handleAddStudent = async (e) => {
     e.preventDefault();
+    if (!teacher || !teacher.id) {
+      alert('خطأ: ملف المعلم غير موجود. يرجى تسجيل الخروج والدخول مرة أخرى.');
+      return;
+    }
     try {
       await createStudent({
         ...newStudent,
@@ -68,6 +85,38 @@ const Students = () => {
     student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     student.student_id.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Show loading while auth is initializing
+  if (authLoading || loading) {
+    return (
+      <div className="min-h-screen bg-cream-500 flex items-center justify-center">
+        <div className="text-center">
+          <div className="spinner mb-4"></div>
+          <p className="text-child-lg">جاري التحميل...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error if teacher profile doesn't exist
+  if (user && !teacher) {
+    return (
+      <div className="min-h-screen bg-cream-500 flex items-center justify-center">
+        <div className="card max-w-md text-center">
+          <h2 className="text-child-xl font-bold text-error mb-4">خطأ في ملف المعلم</h2>
+          <p className="text-child-base text-gray-700 mb-6">
+            ملف المعلم غير موجود في قاعدة البيانات. يرجى المحاولة مرة أخرى أو الاتصال بالدعم الفني.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="btn-primary"
+          >
+            إعادة تحميل الصفحة
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-cream-500">

@@ -17,12 +17,18 @@ const supabaseAxios = axios.create({
 // Request interceptor to add auth token
 supabaseAxios.interceptors.request.use(
   async (config) => {
-    // Get the current session token
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session?.access_token) {
-      config.headers.Authorization = `Bearer ${session.access_token}`;
-    } else {
-      // Fallback to anon key if no session
+    try {
+      // Get the current session token
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (!error && session?.access_token) {
+        config.headers.Authorization = `Bearer ${session.access_token}`;
+      } else {
+        // Fallback to anon key if no session
+        config.headers.Authorization = `Bearer ${supabaseAnonKey}`;
+      }
+    } catch (err) {
+      // If getting session fails, use anon key
+      console.warn('Failed to get session token, using anon key:', err);
       config.headers.Authorization = `Bearer ${supabaseAnonKey}`;
     }
     return config;
@@ -76,12 +82,42 @@ export const supabaseApi = {
             try {
               const query = buildQuery({ select: selectColumns, eq: { [column]: value } });
               const response = await supabaseAxios.get(`/${table}?${query}`);
+              
+              // Handle empty array (no rows found)
+              if (Array.isArray(response.data)) {
+                if (response.data.length === 0) {
+                  return { 
+                    data: null, 
+                    error: { 
+                      code: 'PGRST116', 
+                      message: 'No rows returned',
+                      details: null,
+                      hint: null
+                    } 
+                  };
+                }
+                return { 
+                  data: response.data[0], 
+                  error: null 
+                };
+              }
+              
               return { 
-                data: Array.isArray(response.data) && response.data.length > 0 ? response.data[0] : response.data, 
+                data: response.data, 
                 error: null 
               };
             } catch (error) {
-              return { data: null, error: error.response?.data || error };
+              // Extract Supabase error format
+              const errorData = error.response?.data;
+              return { 
+                data: null, 
+                error: errorData || {
+                  code: error.response?.status === 403 ? '42501' : 'UNKNOWN',
+                  message: error.message || 'Unknown error',
+                  details: errorData,
+                  hint: null
+                }
+              };
             }
           },
           order: async (orderColumn, options = { ascending: true }) => {

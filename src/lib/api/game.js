@@ -30,8 +30,20 @@ export const getGameData = (level, stage) => {
 /**
  * Start a new game session
  */
-export const startGameSession = async (studentId, level, stage) => {
+export const startGameSession = async (studentId, level, stage, options = {}) => {
   const sessionId = nanoid();
+  
+  // Get settings from localStorage or use defaults
+  const globalSettings = JSON.parse(localStorage.getItem('gameSettings_global') || '{}');
+  const levelSettings = JSON.parse(localStorage.getItem('gameSettings_levels') || '{}');
+  
+  // Use level-specific settings if available, otherwise use global settings
+  const timingMode = options.timingMode || levelSettings[level]?.timingMode || globalSettings.timingMode || 'medium';
+  const waitTimer = options.waitTimer !== undefined 
+    ? options.waitTimer 
+    : (levelSettings[level]?.waitTimer !== undefined 
+        ? levelSettings[level].waitTimer 
+        : (globalSettings.waitTimer !== undefined ? globalSettings.waitTimer : 5));
   
   const { data, error } = await supabaseApi
     .from('game_sessions')
@@ -50,7 +62,12 @@ export const startGameSession = async (studentId, level, stage) => {
     throw error;
   }
   
-  return data;
+  // Return session data with settings
+  return {
+    ...data,
+    timingMode,
+    waitTimer
+  };
 };
 
 /**

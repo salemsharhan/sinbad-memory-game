@@ -18,43 +18,102 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
+    let subscription = null;
+    let timeoutId = null;
+
+    // Safety timeout to ensure loading always resolves
+    timeoutId = setTimeout(() => {
+      if (mounted) {
+        console.warn('Auth initialization timeout - forcing loading to false');
+        setLoading(false);
+      }
+    }, 5000); // 5 second timeout
+
     // Check active sessions and sets the user
     const initializeAuth = async () => {
       try {
         const currentUser = await getCurrentUser();
+        if (!mounted) return;
+        
         setUser(currentUser);
         
         if (currentUser) {
-          const teacherProfile = await getTeacherProfile(currentUser.id);
-          setTeacher(teacherProfile);
+          console.log('[AuthContext] Current user found, fetching teacher profile...');
+          try {
+            const teacherProfile = await getTeacherProfile(currentUser.id);
+            console.log('[AuthContext] Teacher profile result:', teacherProfile);
+            if (mounted) {
+              setTeacher(teacherProfile);
+            }
+          } catch (profileError) {
+            console.error('[AuthContext] Error getting teacher profile:', profileError);
+            console.error('[AuthContext] Error stack:', profileError.stack);
+            // Don't block loading if teacher profile fails
+            if (mounted) {
+              setTeacher(null);
+            }
+          }
+        } else {
+          console.log('[AuthContext] No current user found');
         }
       } catch (err) {
         console.error('Error initializing auth:', err);
-        setError(err.message);
+        if (mounted) {
+          setError(err.message);
+        }
       } finally {
-        setLoading(false);
+        if (mounted) {
+          clearTimeout(timeoutId);
+          setLoading(false);
+        }
       }
     };
 
     initializeAuth();
 
     // Listen for changes on auth state (sign in, sign out, etc.)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (session?.user) {
-          setUser(session.user);
-          const teacherProfile = await getTeacherProfile(session.user.id);
-          setTeacher(teacherProfile);
-        } else {
-          setUser(null);
-          setTeacher(null);
+    try {
+      const { data } = supabase.auth.onAuthStateChange(
+        async (event, session) => {
+          if (!mounted) return;
+          
+          if (session?.user) {
+            setUser(session.user);
+            try {
+              const teacherProfile = await getTeacherProfile(session.user.id);
+              if (mounted) {
+                setTeacher(teacherProfile);
+              }
+            } catch (profileError) {
+              console.error('Error getting teacher profile on auth change:', profileError);
+              if (mounted) {
+                setTeacher(null);
+              }
+            }
+          } else {
+            setUser(null);
+            setTeacher(null);
+          }
+          if (mounted) {
+            setLoading(false);
+          }
         }
-        setLoading(false);
-      }
-    );
+      );
+      subscription = data.subscription;
+    } catch (err) {
+      console.error('Error setting up auth listener:', err);
+      setLoading(false);
+    }
 
     return () => {
-      subscription?.unsubscribe();
+      mounted = false;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (subscription) {
+        subscription.unsubscribe();
+      }
     };
   }, []);
 
