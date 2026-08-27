@@ -299,3 +299,4 @@ export function getImagePath(arabicName) {
   return `/game-images/${fileName}.png`;
 }
 
+
